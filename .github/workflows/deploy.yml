@@ -1,0 +1,99 @@
+name: Test and deploy
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      # only README images
+      - 'docs/**'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FUNCTION_NAME: I5Express
+  RUNTIME: nodejs24.x
+  STATE_BUCKET: andrewmacheret-i5
+  S3_PATH: s3://andrewmacheret.com/projects/i5
+  API_URL: https://i5.andrewmacheret.com
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Not Seattle time, so tests catch code that leans on the computer's time zone
+      - run: npm test
+        env:
+          TZ: Asia/Tokyo
+      - run: npm run build
+      - run: npm run build:lambda
+
+  deploy:
+    needs: test
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:lambda
+      - run: zip -j lambda.zip dist-lambda/index.mjs
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+      - name: Update runtime and settings
+        run: |
+          aws lambda update-function-configuration --function-name "$FUNCTION_NAME" \
+            --runtime "$RUNTIME" --handler index.handler --timeout 30 --memory-size 256 \
+            --environment "Variables={STATE_BUCKET=$STATE_BUCKET}" \
+            --output text --query LastUpdateStatus
+          aws lambda wait function-updated --function-name "$FUNCTION_NAME"
+      - name: Update code
+        run: |
+          aws lambda update-function-code --function-name "$FUNCTION_NAME" \
+            --zip-file fileb://lambda.zip \
+            --output text --query LastUpdateStatus
+          aws lambda wait function-updated --function-name "$FUNCTION_NAME"
+      # The same thing the 15 minute schedule sends. Fails the deploy if the new code can't read WSDOT's page.
+      - name: Read WSDOT
+        run: |
+          aws lambda invoke --function-name "$FUNCTION_NAME" \
+            --cli-binary-format raw-in-base64-out --payload '{"refresh": true}' refresh.json \
+            --query FunctionError --output text | tee function-error.txt
+          jq '{fetchedAt, checkedAt, error, pageChanged, problems}' refresh.json
+          grep -qx None function-error.txt
+          jq -e '.info.scheduleFromPage and .error == null' refresh.json
+      # Everything under projects/i5 comes from this repo, so --delete is safe.
+      # Files in assets/ have a content hash in their name, so they can be cached forever.
+      - name: Upload website
+        run: |
+          aws s3 sync dist "$S3_PATH" --delete --exclude 'assets/*' --exclude index.html --cache-control max-age=300
+          aws s3 sync dist/assets "$S3_PATH/assets" --delete --cache-control 'public, max-age=31536000, immutable'
+          aws s3 cp dist/index.html "$S3_PATH/index.html" --cache-control no-cache
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths '/projects/i5/*'
+      - name: Smoke test
+        run: |
+          curl -sSf "$API_URL/status" | jq -e '.info.scheduleFromPage and (.current.verdict | length > 0)'
+          curl -sSf "$API_URL/badge.svg" | grep -q '<svg'
