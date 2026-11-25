@@ -33,6 +33,39 @@ const INLINE_RETRY = 5 * 60_000;
 
 const CORS = { 'Access-Control-Allow-Origin': '*' };
 
+// The schedule reads WSDOT every 15 minutes, so this means it missed a few
+const HEALTHCHECK_MAX_AGE = 45 * 60_000;
+
+interface Check {
+  name: string;
+  ok: boolean;
+  detail: string;
+}
+
+const minutesAgo = (at: number, now: number) => `${Math.round((now - at) / 60_000)} minutes ago`;
+
+/**
+ * GET /healthcheck, for the daily canary (github.com/andrewmacheret/canary).
+ * It reads the saved state, not current(), since current() reads WSDOT itself when the schedule is late.
+ */
+export function healthcheckBody(state: ServerState, now: number) {
+  const { checkedAt, fetchedAt } = state;
+  const checks: Check[] = [
+    checkedAt !== null && now - checkedAt <= HEALTHCHECK_MAX_AGE
+      ? { name: 'Refresh schedule', ok: true, detail: `last ran ${minutesAgo(checkedAt, now)}` }
+      : { name: 'Refresh schedule', ok: false, detail: checkedAt === null ? 'never ran' : `last ran ${minutesAgo(checkedAt, now)}` },
+    state.pageChanged
+      ? { name: "WSDOT's page", ok: false, detail: `changed and can't be read: ${state.problems.join(', ') || 'no schedule found'}` }
+      : state.error
+        ? { name: "WSDOT's page", ok: false, detail: state.error }
+        : fetchedAt === null
+          ? { name: "WSDOT's page", ok: false, detail: 'never read' }
+          : { name: "WSDOT's page", ok: true, detail: `read ${minutesAgo(fetchedAt, now)}` },
+  ];
+  const ok = checks.every((c) => c.ok);
+  return { ok, body: { status: ok ? 'ok' : 'fail', checks } };
+}
+
 export function statusBody(state: ServerState, now: number) {
   const snap = makeSnapshot(toFetchResult(state), now);
   return {
@@ -103,6 +136,10 @@ export function createHandler(store: Store, download: Download = httpGet, clock:
           return { statusCode: 302, headers: { Location: PAGE_URL, 'Cache-Control': 'public, max-age=3600' }, body: '' };
         case '/status':
           return json(200, statusBody(await current(now), now));
+        case '/healthcheck': {
+          const { ok, body } = healthcheckBody(await store.loadState(), now);
+          return json(ok ? 200 : 503, body, 'no-store');
+        }
         case '/badge.svg': {
           const snap = makeSnapshot(toFetchResult(await current(now)), now);
           const style: BadgeStyle = q.style === 'flat-square' ? 'flat-square' : 'flat';
@@ -115,7 +152,7 @@ export function createHandler(store: Store, download: Download = httpGet, clock:
           return svgResponse(iconSvg(snap, size), headers['if-none-match']);
         }
         default:
-          return json(404, { error: `Not found: ${path}. Try /status, /badge.svg or /icon.svg` }, 'no-store');
+          return json(404, { error: `Not found: ${path}. Try /status, /badge.svg, /icon.svg or /healthcheck` }, 'no-store');
       }
     } catch (e) {
       console.error(e);

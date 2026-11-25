@@ -2,7 +2,7 @@
 
 # I-5 Express for the Web
 
-[![Test and deploy](https://github.com/andrewmacheret/i5-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/i5-web/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/i5-web/blob/main/LICENSE.md)
+[![Test and deploy](https://github.com/andrewmacheret/i5-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/i5-web/actions/workflows/deploy.yml) [![Canary](https://github.com/andrewmacheret/i5-web/actions/workflows/canary.yml/badge.svg)](https://github.com/andrewmacheret/i5-web/actions/workflows/canary.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/i5-web/blob/main/LICENSE.md)
 
 A web page that shows which way Seattle's I-5 express lanes are running right now, and whether they're open at all. It also serves a live badge that any site or README can show:
 
@@ -72,6 +72,8 @@ The badge says "can't confirm" in amber whenever the page would. It's sent with 
 
 Times are milliseconds since 1970. Days are Seattle dates like `"2026-11-26"`. Times of day are minutes after midnight. Use `current.shown`, not `current.scheduled`, if you only want a direction when it's safe to trust.
 
+`GET /healthcheck` returns `{"status": "ok", "checks": [...]}`, or `"fail"` with status 503 if the 15 minute refresh stopped or can't read WSDOT's page. See [Health check](#health-check).
+
 ## When to trust it
 
 WSDOT doesn't publish a live feed for the express lanes. The server reads [WSDOT's express lanes page](https://wsdot.wa.gov/travel/roads-bridges/express-lanes) every 15 minutes and works out the status from the posted schedule, early closures and planned closures.
@@ -117,6 +119,10 @@ You need Node.js 24 or later.
 | `npm run build:lambda` | Bundle the Lambda into `dist-lambda/index.mjs` |
 
 Add `?api=` to the page's address to use another copy of the API, like `?api=https://i5.andrewmacheret.com` to run the local page against the real one.
+
+## Health check
+
+[`/projects/i5/healthcheck/`](https://andrewmacheret.com/projects/i5/healthcheck/) checks the page and its scripts and styles, the README badge, and the API's `/healthcheck`, which fails if the 15 minute refresh stopped or can't read WSDOT's page. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 

@@ -158,6 +158,38 @@ describe('handler', () => {
     expect(downloads()).toBe(1);
   });
 
+  test('/healthcheck', async () => {
+    const { get } = await setup(now + 10 * MINUTE);
+    const res = await get('/healthcheck');
+    expect(res.statusCode).toBe(200);
+    expect(res.headers['Cache-Control']).toBe('no-store');
+    expect(JSON.parse(res.body)).toEqual({
+      status: 'ok',
+      checks: [
+        { name: 'Refresh schedule', ok: true, detail: 'last ran 10 minutes ago' },
+        { name: "WSDOT's page", ok: true, detail: 'read 10 minutes ago' },
+      ],
+    });
+  });
+
+  test('/healthcheck fails when the schedule stops, without reading WSDOT itself', async () => {
+    const late = await setup(now + 60 * MINUTE);
+    const res = await late.get('/healthcheck');
+    expect(res.statusCode).toBe(503);
+    expect(JSON.parse(res.body).checks[0]).toEqual({ name: 'Refresh schedule', ok: false, detail: 'last ran 60 minutes ago' });
+    expect(late.downloads()).toBe(0);
+  });
+
+  test("/healthcheck says when WSDOT's page can't be read", async () => {
+    const { store, get } = await setup();
+    await refresh(store, serve('<html>new site</html>'), now);
+    expect(JSON.parse((await get('/healthcheck')).body).checks[1]).toMatchObject({ ok: false });
+
+    await refresh(store, serve(fixture()), now);
+    await refresh(store, offline, now);
+    expect(JSON.parse((await get('/healthcheck')).body).checks[1]).toEqual({ name: "WSDOT's page", ok: false, detail: 'offline' });
+  });
+
   test('other paths', async () => {
     const { get } = await setup();
     expect((await get('/')).statusCode).toBe(302);
