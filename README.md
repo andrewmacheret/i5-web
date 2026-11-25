@@ -72,8 +72,6 @@ The badge says "can't confirm" in amber whenever the page would. It's sent with 
 
 Times are milliseconds since 1970. Days are Seattle dates like `"2026-11-26"`. Times of day are minutes after midnight. Use `current.shown`, not `current.scheduled`, if you only want a direction when it's safe to trust.
 
-`GET /healthcheck` returns `{"status": "ok", "checks": [...]}`, or `"fail"` with status 503 if the 15 minute refresh stopped or can't read WSDOT's page. See [Health check](#health-check).
-
 ## When to trust it
 
 WSDOT doesn't publish a live feed for the express lanes. The server reads [WSDOT's express lanes page](https://wsdot.wa.gov/travel/roads-bridges/express-lanes) every 15 minutes and works out the status from the posted schedule, early closures and planned closures.
@@ -122,7 +120,7 @@ Add `?api=` to the page's address to use another copy of the API, like `?api=htt
 
 ## Health check
 
-[`/projects/i5/healthcheck/`](https://andrewmacheret.com/projects/i5/healthcheck/) checks the page and its scripts and styles, the README badge, and the API's `/healthcheck`, which fails if the 15 minute refresh stopped or can't read WSDOT's page. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles, the README badge, and the API's own health check, which fails if the 15 minute refresh stopped or can't read WSDOT's page. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 
