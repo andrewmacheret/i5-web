@@ -1,3 +1,6 @@
+// Imported up front, so a cold start loads the SDK during Lambda's init, which gets more CPU
+// than the first request does
+import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { EMPTY_STATE, type ServerState } from '../core/state.ts';
 
 /** Where the Lambda keeps what it read from WSDOT between runs. */
@@ -12,22 +15,15 @@ const STATE_KEY = 'state.json';
 
 export class S3Store implements Store {
   private readonly bucket: string;
-  private client: import('@aws-sdk/client-s3').S3Client | null = null;
+  private readonly client = new S3Client({});
 
   constructor(bucket: string) {
     this.bucket = bucket;
   }
 
-  private async s3() {
-    const sdk = await import('@aws-sdk/client-s3');
-    this.client ??= new sdk.S3Client({});
-    return { sdk, client: this.client };
-  }
-
   async loadState(): Promise<ServerState> {
-    const { sdk, client } = await this.s3();
     try {
-      const res = await client.send(new sdk.GetObjectCommand({ Bucket: this.bucket, Key: STATE_KEY }));
+      const res = await this.client.send(new GetObjectCommand({ Bucket: this.bucket, Key: STATE_KEY }));
       return { ...EMPTY_STATE, ...JSON.parse(await res.Body!.transformToString()) };
     } catch (e) {
       if ((e as { name?: string }).name === 'NoSuchKey') return EMPTY_STATE;
@@ -44,8 +40,7 @@ export class S3Store implements Store {
   }
 
   private async put(key: string, body: string, contentType: string) {
-    const { sdk, client } = await this.s3();
-    await client.send(new sdk.PutObjectCommand({ Bucket: this.bucket, Key: key, Body: body, ContentType: contentType }));
+    await this.client.send(new PutObjectCommand({ Bucket: this.bucket, Key: key, Body: body, ContentType: contentType }));
   }
 }
 
