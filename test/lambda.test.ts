@@ -113,6 +113,7 @@ describe('handler', () => {
     const res = await get('/status');
     expect(res.statusCode).toBe(200);
     expect(res.headers['Access-Control-Allow-Origin']).toBe('*');
+    expect(res.headers['X-Robots-Tag']).toBe('noindex');
     const body = JSON.parse(res.body);
     expect(body.fetchedAt).toBe(now);
     expect(body.info.scheduleFromPage).toBe(true);

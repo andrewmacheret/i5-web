@@ -32,6 +32,8 @@ const OVERDUE = 30 * 60_000;
 const INLINE_RETRY = 5 * 60_000;
 
 const CORS = { 'Access-Control-Allow-Origin': '*' };
+// Keeps Google from listing the API in search results
+const NOINDEX = { 'X-Robots-Tag': 'noindex' };
 
 // The schedule reads WSDOT every 15 minutes, so this means it missed a few
 const HEALTHCHECK_MAX_AGE = 45 * 60_000;
@@ -89,14 +91,14 @@ const flag = (v: string | undefined, fallback: boolean) =>
 function svgResponse(svg: string, ifNoneMatch: string | undefined): HttpResponse {
   const etag = `"${createHash('sha1').update(svg).digest('hex').slice(0, 16)}"`;
   // no-cache makes GitHub's image proxy check back each time, so README badges stay current
-  const headers = { ...CORS, 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'no-cache', ETag: etag };
+  const headers = { ...CORS, ...NOINDEX, 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'no-cache', ETag: etag };
   if (ifNoneMatch === etag) return { statusCode: 304, headers, body: '' };
   return { statusCode: 200, headers, body: svg };
 }
 
 const json = (status: number, body: unknown, cache = 'public, max-age=60'): HttpResponse => ({
   statusCode: status,
-  headers: { ...CORS, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': cache },
+  headers: { ...CORS, ...NOINDEX, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': cache },
   body: JSON.stringify(body),
 });
 
