@@ -95,7 +95,7 @@ It can't know about a closure WSDOT hasn't posted yet, like an emergency repair 
 
 - `src/core` is TypeScript with no browser or AWS code, ported from the apps. It reads WSDOT's page (`parser.ts`), works out the status at any moment (`engine.ts`), decides whether the status can be trusted (`trust.ts`), and draws the icon (`icon.ts`). The page and the Lambda both use it.
 - `src/web` is the page (React and Vite), deployed to `s3://andrewmacheret.com/projects/i5`.
-- `src/lambda` is a Node.js AWS Lambda called `I5Express`, behind an API Gateway HTTP API at `i5.andrewmacheret.com`.
+- `src/lambda` is a Node.js AWS Lambda called `I5Express`, behind an API Gateway HTTP API at `i5.andrewmacheret.com`. The API's stage settings, which aren't in git, limit it to 20 requests a second with bursts of 40.
   - An EventBridge rule sends it `{"refresh": true}` every 15 minutes. It downloads WSDOT's page, about 140 KB, and saves what it read to `state.json` in the private S3 bucket `andrewmacheret-i5`, with the raw page beside it. An unreadable page is saved as `unreadable.html` instead, so the last good copy stays.
   - `GET /status`, `/badge.svg` and `/icon.svg` read that file, checking S3 again after a minute. If the schedule hasn't run in 30 minutes, a request reads WSDOT itself.
   - The badge measures its text with a table of Verdana widths, like shields.io. `scripts/verdana-widths.swift` makes the table on a Mac.
