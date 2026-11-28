@@ -123,8 +123,9 @@ function StatusCard({ snap, loading }: { snap: Snapshot; loading: boolean }) {
             </Callout>
           ))}
           <p className="live-sources">
-            <strong>Check a live source before you drive:</strong> <a href={SOURCES.travelMap}>Traffic cameras</a> ·{' '}
-            <a href={SOURCES.wsdotTraffic}>WSDOT Traffic</a> · <a href={SOURCES.expressLanes}>WSDOT page</a>
+            <strong>Check a live source before you drive:</strong>{' '}
+            <a href={SOURCES.wsdotTraffic}>WSDOT Traffic on Bluesky</a> · <a href={SOURCES.travelMap}>Traffic cameras</a> ·{' '}
+            <a href={SOURCES.expressLanes}>WSDOT page</a>
           </p>
         </div>
       )}

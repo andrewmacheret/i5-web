@@ -101,7 +101,7 @@ describe('the page', () => {
     expect(text).toContain("Can't confirm");
     expect(text).toContain("Expected northbound, but don't rely on it");
     expect(text).toContain('No word yet on Thanksgiving');
-    expect(text).toContain('Check a live source before you drive: Traffic cameras · WSDOT Traffic · WSDOT page');
+    expect(text).toContain('Check a live source before you drive: WSDOT Traffic on Bluesky · Traffic cameras · WSDOT page');
   });
 
   it('says it is checking while the models read a new page', () => {
