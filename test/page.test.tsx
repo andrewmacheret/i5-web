@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { ServerStatus } from '../src/core/models.ts';
 import { makeSnapshot } from '../src/core/snapshot.ts';
+import { CameraGrid, cameraMapLink } from '../src/web/Cameras.tsx';
 import { Page } from '../src/web/Page.tsx';
 
 // Renders the page from real /status responses. The fixtures come from i5-server-lambdas, made
@@ -165,5 +166,45 @@ describe('the page', () => {
     const f = fixture('confident');
     const { text } = render(f.status, f.at, { loadError: "Couldn't reach the server: Failed to fetch" });
     expect(text).toContain("Couldn't reach the server: Failed to fetch");
+  });
+});
+
+describe('cameras', () => {
+  const f = fixture('confident');
+  const cameras = f.status?.cameras ?? [];
+
+  it('start closed, offering the express lane ones, so no pictures load', () => {
+    const { html, text } = page('confident');
+    expect(text).toContain('Cameras Show 2 express lane cameras, downtown to Northgate');
+    expect(html).toContain('<details>');
+    expect(html).not.toContain('images.wsdot.wa.gov');
+  });
+
+  it("are left out when the server didn't send any", () => {
+    expect(page('holiday').text).not.toContain('Cameras');
+  });
+
+  it("show WSDOT's picture, which changes address every 5 minutes, with its milepost and a map link", () => {
+    const grid = (now: number) => renderToStaticMarkup(<CameraGrid cameras={cameras.slice(1, 2)} now={now} />);
+    const html = grid(f.at);
+    expect(html).toMatch(/<img src="https:\/\/images\.wsdot\.wa\.gov\/nw\/[\w]+\.jpg\?v=\d+"/);
+    expect(html).toContain('loading="lazy"');
+    expect(html).toContain('Roanoke St Express Lanes');
+    expect(html).toContain('MP 168 ·');
+    expect(grid(f.at + 60_000)).toBe(html);
+    expect(grid(f.at + 5 * 60_000)).not.toBe(html);
+  });
+
+  it('link to the travel map zoomed in on the camera', () => {
+    const c = cameras[0];
+    const url = new URL(cameraMapLink(c));
+    expect(url.origin + url.pathname).toBe('https://wsdot.com/Travel/Real-time/Map/');
+    expect(url.searchParams.get('layers')).toBe('traffic-flow,alert,camera');
+    const [west, south, east, north] = (url.searchParams.get('extent') ?? '').split(',').map(Number);
+    expect(west).toBeLessThan(c.lon);
+    expect(east).toBeGreaterThan(c.lon);
+    expect(south).toBeLessThan(c.lat);
+    expect(north).toBeGreaterThan(c.lat);
+    expect(east - west).toBeCloseTo(0.012, 5);
   });
 });

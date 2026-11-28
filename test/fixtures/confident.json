@@ -1445,6 +1445,44 @@
    },
    "nextText": "Closes at 11:00 PM",
    "concerns": []
-  }
+  },
+  "cameras": [
+   {
+    "id": 1028,
+    "name": "Yesler Way",
+    "milepost": 165,
+    "express": false,
+    "lat": 47.6017,
+    "lon": -122.324892,
+    "image": "https://images.wsdot.wa.gov/nw/005vc16511.jpg"
+   },
+   {
+    "id": 9541,
+    "name": "Roanoke St Express Lanes",
+    "milepost": 168,
+    "express": true,
+    "lat": 47.641693,
+    "lon": -122.322819,
+    "image": "https://images.wsdot.wa.gov/nw/005vc16803.jpg"
+   },
+   {
+    "id": 9543,
+    "name": "Ship Canal Express Lanes",
+    "milepost": 168.8,
+    "express": true,
+    "lat": 47.654157,
+    "lon": -122.322362,
+    "image": "https://images.wsdot.wa.gov/nw/005vc16886.jpg"
+   },
+   {
+    "id": 1032,
+    "name": "NE 45th St",
+    "milepost": 169.3,
+    "express": false,
+    "lat": 47.661773,
+    "lon": -122.321905,
+    "image": "https://images.wsdot.wa.gov/nw/005vc16939.jpg"
+   }
+  ]
  }
 }

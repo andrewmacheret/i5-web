@@ -23,6 +23,7 @@ The page has the same sections as the Mac popover and the Android app screen:
 - **Notices:** closures and other notices in effect now or later today.
 - **Timelines:** colored bars for today and tomorrow, with a marker for now.
 - **Travel times:** downtown Seattle to Everett and back through the express lanes and on the regular lanes, from WSDOT's sensors, with the regular lanes' usual time.
+- **Cameras:** WSDOT's camera pictures along the express lanes, closed until opened so nothing loads before that. The express lane cameras come first, and the rest of I-5 from downtown to Northgate is one tap away. Each picture links to the full image and to the travel map zoomed in on that camera. The browser loads the pictures straight from WSDOT and refreshes them every 5 minutes.
 - **Coming up:** the next four changes with countdowns. A ⚠ marks days that may not follow the regular schedule.
 - **Planned changes:** weekend closures, early closing dates, and holidays in the next two weeks, with how sure the times are and WSDOT's own words.
 - **Regular schedule and sources:** the weekly schedule as WSDOT posts it, and links to every page and alert the data comes from.

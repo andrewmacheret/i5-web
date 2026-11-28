@@ -146,6 +146,20 @@ export interface TripTimes {
   usual: number | null;
 }
 
+/** A WSDOT traffic camera along the express lanes */
+export interface Camera {
+  id: number;
+  /** Where it is, like "Roanoke St Express Lanes" */
+  name: string;
+  milepost: number;
+  /** WSDOT's name for it says it looks at the express lanes */
+  express: boolean;
+  lat: number;
+  lon: number;
+  /** A JPEG on WSDOT's server, updated about every 5 minutes */
+  image: string;
+}
+
 /** GET /status */
 export interface ServerStatus {
   published: Published | null;
@@ -156,6 +170,8 @@ export interface ServerStatus {
   /** Why the last try failed */
   error: string | null;
   live: LiveReading | null;
+  /** Cameras along the express lanes, south to north. Missing from older servers. */
+  cameras?: Camera[] | null;
 }
 
 export const SOURCES = {

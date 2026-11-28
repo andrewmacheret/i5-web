@@ -5,6 +5,7 @@ import { doubtsBetween } from '../core/timeline.ts';
 import { type Snapshot, verb } from '../core/snapshot.ts';
 import { LIVE_MAX_AGE } from '../core/trust.ts';
 import BadgeMaker from './BadgeMaker.tsx';
+import Cameras from './Cameras.tsx';
 import { Callout, Card, Dot, Icon, ScheduleRows, SourceLink, StatusIcon, Timeline } from './parts.tsx';
 
 // Everything on the page, drawn from the server's timeline. No data loading here, so tests can
@@ -55,6 +56,7 @@ export function Page({ snap, loaded, loadError, refreshing, preview, onRefresh, 
       <Notices snap={snap} />
       <Timelines snap={snap} />
       <TravelTimes snap={snap} />
+      <Cameras cameras={snap.status.cameras ?? []} now={snap.now} />
       <ComingUp snap={snap} />
       <Planned snap={snap} />
       <RegularSchedule snap={snap} />
