@@ -2,8 +2,6 @@
 *.log
 node_modules/
 dist/
-dist-lambda/
-.local-api/
 .env
 .env.*
 *.env

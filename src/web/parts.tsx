@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import type { Segment } from '../core/engine.ts';
 import { iconSvg } from '../core/icon.ts';
 import { type LaneStatus, type LaneWindow, TITLES, timeLabel, type TimeOfDay } from '../core/models.ts';
 import type { Snapshot } from '../core/snapshot.ts';
+import type { DaySegment } from '../core/timeline.ts';
 
 export function StatusIcon({ snap, height }: { snap: Snapshot; height: number }) {
   // The same drawing as /icon.svg, so the page and the API never disagree
@@ -91,7 +91,7 @@ export function Timeline({
 }: {
   label: string;
   warning?: string;
-  segments: Segment[];
+  segments: DaySegment[];
   now?: TimeOfDay;
 }) {
   const open = segments.filter((s) => s.status !== 'closed');

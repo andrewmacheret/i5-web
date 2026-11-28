@@ -1,4 +1,4 @@
-import type { ServerState } from '../core/state.ts';
+import type { ServerStatus } from '../core/models.ts';
 
 const params = new URLSearchParams(location.search);
 
@@ -9,12 +9,13 @@ export const API_URL = (
 
 export const PAGE_URL = 'https://andrewmacheret.com/projects/i5/';
 
-const SAVED_KEY = 'i5-status';
+// v2 since the server started sending a timeline, so copies in the old shape are never read
+const SAVED_KEY = 'i5-status-v2';
 
-export async function loadStatus(): Promise<ServerState> {
+export async function loadStatus(): Promise<ServerStatus> {
   const res = await fetch(`${API_URL}/status`, { cache: 'no-cache', signal: AbortSignal.timeout(20_000) });
   if (!res.ok) throw new Error(`The server returned HTTP ${res.status}`);
-  const state = (await res.json()) as ServerState;
+  const state = (await res.json()) as ServerStatus;
   try {
     localStorage.setItem(SAVED_KEY, JSON.stringify(state));
   } catch {
@@ -24,10 +25,10 @@ export async function loadStatus(): Promise<ServerState> {
 }
 
 /** The last copy this browser got, so the page has something to show right away */
-export function savedStatus(): ServerState | null {
+export function savedStatus(): ServerStatus | null {
   try {
     const state = JSON.parse(localStorage.getItem(SAVED_KEY) ?? 'null');
-    return state && typeof state === 'object' && 'checkedAt' in state ? state : null;
+    return state && typeof state === 'object' && 'published' in state ? state : null;
   } catch {
     return null;
   }

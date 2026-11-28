@@ -1,20 +1,18 @@
 {
-  "name": "i5-web",
-  "description": "Which way Seattle's I-5 express lanes are open, as a web page and a README badge",
+  "name": "i5-client",
+  "description": "Which way Seattle's I-5 express lanes are open, as a web page drawn from i5-server-lambdas' timeline",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrewmacheret/i5-web.git"
+    "url": "git+https://github.com/andrewmacheret/i5-client.git"
   },
   "author": "Andrew Macheret <andrew.macheret@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "api": "node scripts/local-api.ts",
     "build": "vite build",
-    "build:lambda": "esbuild src/lambda/index.ts --bundle --platform=node --target=node24 --format=esm --external:@aws-sdk/* --outfile=dist-lambda/index.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview"
@@ -27,12 +25,10 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1177.0",
     "@types/node": "^26.6.7",
     "@types/react": "^19.3.1",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
-    "esbuild": "^0.28.2",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.1"

@@ -1,0 +1,126 @@
+{
+ "about": "Northbound around the clock for Revive I-5, Aug. 2026, with no weekly schedule on the page",
+ "at": 1786325747000,
+ "status": {
+  "published": {
+   "publishedAt": 1786325147000,
+   "horizon": {
+    "start": 1786172400000,
+    "end": 1791529200000
+   },
+   "schedule": null,
+   "segments": [
+    {
+     "start": 1786172400000,
+     "end": 1786201200000,
+     "status": "closed"
+    },
+    {
+     "start": 1786201200000,
+     "end": 1786221000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1786221000000,
+     "end": 1786221900000,
+     "status": "closed"
+    },
+    {
+     "start": 1786221900000,
+     "end": 1786255200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1786255200000,
+     "end": 1786287600000,
+     "status": "closed"
+    },
+    {
+     "start": 1786287600000,
+     "end": 1786307400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1786307400000,
+     "end": 1786308300000,
+     "status": "closed"
+    },
+    {
+     "start": 1786308300000,
+     "end": 1791529200000,
+     "status": "northbound"
+    }
+   ],
+   "doubts": [
+    {
+     "start": 1786172400000,
+     "end": 1786325100000,
+     "title": "Usual hours not listed",
+     "detail": "WSDOT's page doesn't list its weekly schedule right now, so these are the hours it listed in Nov. 2026.",
+     "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes",
+     "source": "page"
+    }
+   ],
+   "notices": [
+    {
+     "title": "Northbound around the clock for Revive I-5",
+     "detail": "Express lanes are northbound-only 24 hours a day for Revive I-5\nThe I-5 express lanes will remain in the northbound direction around-the-clock, until the end of 2026. This is to facilitate the lane reductions on northbound I-5 as part of the Revive I-5 project. There are no exits from the northbound express lanes to downtown Seattle or SR 520. Southbound I-5 travelers should plan for additional delays and congestion due to the express lanes remaining northbound.\nDuring northbound Revive I-5 Ship Canal Bridge work, the express lanes are northbound-only 24 hours a day. Solo drivers may use the express lanes, but must use the entrance from the northbound I-5 mainline or the Mercer Street or Howell Street/Eastlake Avenue on-ramp.",
+     "link": "https://wsdot.wa.gov/construction-planning/search-projects/revive-i-5-ship-canal-bridge-preservation",
+     "kind": "northbound",
+     "spans": [
+      {
+       "start": 1786325100000,
+       "end": 1798790400000
+      }
+     ],
+     "startCertainty": "exact",
+     "endCertainty": "unknown",
+     "source": "page"
+    },
+    {
+     "title": "Ninth Avenue on-ramp closed",
+     "detail": "Ninth Avenue on-ramp to express lanes closed until Sept. 8\nThe Ninth Avenue on-ramp in Seattle to the I-5 Express Lanes is closed around the clock until Sept. 8. The entrance from Pike Street remains open.",
+     "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes",
+     "kind": "other",
+     "spans": [
+      {
+       "start": 1786325100000,
+       "end": 1788850800000
+      }
+     ],
+     "startCertainty": "exact",
+     "endCertainty": "unknown",
+     "source": "page"
+    }
+   ],
+   "page": {
+    "kind": "page",
+    "hash": "f3cb5f2a4d08781f",
+    "firstSeen": 1786325147000,
+    "models": [
+     "gemini-4-hydrogen",
+     "gpt-oss-120b"
+    ],
+    "status": "answered",
+    "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes"
+   },
+   "alerts": []
+  },
+  "fetchedAt": 1786325147000,
+  "checkedAt": 1786325147000,
+  "error": null,
+  "live": null,
+  "current": {
+   "at": 1786325747000,
+   "verdict": "confident",
+   "scheduled": "northbound",
+   "shown": "northbound",
+   "next": {
+    "at": 1791529200000,
+    "to": "unknown"
+   },
+   "nextText": "Schedule unknown after 12:00 AM Fri, Oct 9",
+   "concerns": []
+  }
+ }
+}

@@ -1,0 +1,1355 @@
+{
+ "about": "Southbound for winter weather, Dec. 4, 2022, with no set end",
+ "at": 1670084420000,
+ "status": {
+  "published": {
+   "publishedAt": 1670083820000,
+   "horizon": {
+    "start": 1669968000000,
+    "end": 1675324800000
+   },
+   "schedule": {
+    "weekday": [
+     {
+      "status": "southbound",
+      "start": 300,
+      "end": 660
+     },
+     {
+      "status": "northbound",
+      "start": 675,
+      "end": 1380
+     }
+    ],
+    "weekend": [
+     {
+      "status": "southbound",
+      "start": 480,
+      "end": 810
+     },
+     {
+      "status": "northbound",
+      "start": 825,
+      "end": 1380
+     }
+    ]
+   },
+   "segments": [
+    {
+     "start": 1669968000000,
+     "end": 1669986000000,
+     "status": "closed"
+    },
+    {
+     "start": 1669986000000,
+     "end": 1670007600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670007600000,
+     "end": 1670008500000,
+     "status": "closed"
+    },
+    {
+     "start": 1670008500000,
+     "end": 1670040000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670040000000,
+     "end": 1670266800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670266800000,
+     "end": 1670267700000,
+     "status": "closed"
+    },
+    {
+     "start": 1670267700000,
+     "end": 1670299200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670299200000,
+     "end": 1670331600000,
+     "status": "closed"
+    },
+    {
+     "start": 1670331600000,
+     "end": 1670353200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670353200000,
+     "end": 1670354100000,
+     "status": "closed"
+    },
+    {
+     "start": 1670354100000,
+     "end": 1670385600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670385600000,
+     "end": 1670418000000,
+     "status": "closed"
+    },
+    {
+     "start": 1670418000000,
+     "end": 1670439600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670439600000,
+     "end": 1670440500000,
+     "status": "closed"
+    },
+    {
+     "start": 1670440500000,
+     "end": 1670472000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670472000000,
+     "end": 1670504400000,
+     "status": "closed"
+    },
+    {
+     "start": 1670504400000,
+     "end": 1670526000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670526000000,
+     "end": 1670526900000,
+     "status": "closed"
+    },
+    {
+     "start": 1670526900000,
+     "end": 1670558400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670558400000,
+     "end": 1670590800000,
+     "status": "closed"
+    },
+    {
+     "start": 1670590800000,
+     "end": 1670612400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670612400000,
+     "end": 1670613300000,
+     "status": "closed"
+    },
+    {
+     "start": 1670613300000,
+     "end": 1670655600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670655600000,
+     "end": 1670688000000,
+     "status": "closed"
+    },
+    {
+     "start": 1670688000000,
+     "end": 1670707800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670707800000,
+     "end": 1670708700000,
+     "status": "closed"
+    },
+    {
+     "start": 1670708700000,
+     "end": 1670742000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670742000000,
+     "end": 1670774400000,
+     "status": "closed"
+    },
+    {
+     "start": 1670774400000,
+     "end": 1670794200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670794200000,
+     "end": 1670795100000,
+     "status": "closed"
+    },
+    {
+     "start": 1670795100000,
+     "end": 1670828400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670828400000,
+     "end": 1670850000000,
+     "status": "closed"
+    },
+    {
+     "start": 1670850000000,
+     "end": 1670871600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670871600000,
+     "end": 1670872500000,
+     "status": "closed"
+    },
+    {
+     "start": 1670872500000,
+     "end": 1670904000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670904000000,
+     "end": 1670936400000,
+     "status": "closed"
+    },
+    {
+     "start": 1670936400000,
+     "end": 1670958000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1670958000000,
+     "end": 1670958900000,
+     "status": "closed"
+    },
+    {
+     "start": 1670958900000,
+     "end": 1670990400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1670990400000,
+     "end": 1671022800000,
+     "status": "closed"
+    },
+    {
+     "start": 1671022800000,
+     "end": 1671044400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671044400000,
+     "end": 1671045300000,
+     "status": "closed"
+    },
+    {
+     "start": 1671045300000,
+     "end": 1671076800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671076800000,
+     "end": 1671109200000,
+     "status": "closed"
+    },
+    {
+     "start": 1671109200000,
+     "end": 1671130800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671130800000,
+     "end": 1671131700000,
+     "status": "closed"
+    },
+    {
+     "start": 1671131700000,
+     "end": 1671163200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671163200000,
+     "end": 1671195600000,
+     "status": "closed"
+    },
+    {
+     "start": 1671195600000,
+     "end": 1671217200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671217200000,
+     "end": 1671218100000,
+     "status": "closed"
+    },
+    {
+     "start": 1671218100000,
+     "end": 1671260400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671260400000,
+     "end": 1671292800000,
+     "status": "closed"
+    },
+    {
+     "start": 1671292800000,
+     "end": 1671312600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671312600000,
+     "end": 1671313500000,
+     "status": "closed"
+    },
+    {
+     "start": 1671313500000,
+     "end": 1671346800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671346800000,
+     "end": 1671379200000,
+     "status": "closed"
+    },
+    {
+     "start": 1671379200000,
+     "end": 1671399000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671399000000,
+     "end": 1671399900000,
+     "status": "closed"
+    },
+    {
+     "start": 1671399900000,
+     "end": 1671433200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671433200000,
+     "end": 1671454800000,
+     "status": "closed"
+    },
+    {
+     "start": 1671454800000,
+     "end": 1671476400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671476400000,
+     "end": 1671477300000,
+     "status": "closed"
+    },
+    {
+     "start": 1671477300000,
+     "end": 1671508800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671508800000,
+     "end": 1671541200000,
+     "status": "closed"
+    },
+    {
+     "start": 1671541200000,
+     "end": 1671562800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671562800000,
+     "end": 1671563700000,
+     "status": "closed"
+    },
+    {
+     "start": 1671563700000,
+     "end": 1671595200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671595200000,
+     "end": 1671627600000,
+     "status": "closed"
+    },
+    {
+     "start": 1671627600000,
+     "end": 1671649200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671649200000,
+     "end": 1671650100000,
+     "status": "closed"
+    },
+    {
+     "start": 1671650100000,
+     "end": 1671681600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671681600000,
+     "end": 1671714000000,
+     "status": "closed"
+    },
+    {
+     "start": 1671714000000,
+     "end": 1671735600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671735600000,
+     "end": 1671736500000,
+     "status": "closed"
+    },
+    {
+     "start": 1671736500000,
+     "end": 1671768000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671768000000,
+     "end": 1671800400000,
+     "status": "closed"
+    },
+    {
+     "start": 1671800400000,
+     "end": 1671822000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671822000000,
+     "end": 1671822900000,
+     "status": "closed"
+    },
+    {
+     "start": 1671822900000,
+     "end": 1671865200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671865200000,
+     "end": 1671897600000,
+     "status": "closed"
+    },
+    {
+     "start": 1671897600000,
+     "end": 1671917400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1671917400000,
+     "end": 1671918300000,
+     "status": "closed"
+    },
+    {
+     "start": 1671918300000,
+     "end": 1671951600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1671951600000,
+     "end": 1671984000000,
+     "status": "closed"
+    },
+    {
+     "start": 1671984000000,
+     "end": 1672003800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672003800000,
+     "end": 1672004700000,
+     "status": "closed"
+    },
+    {
+     "start": 1672004700000,
+     "end": 1672038000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672038000000,
+     "end": 1672059600000,
+     "status": "closed"
+    },
+    {
+     "start": 1672059600000,
+     "end": 1672081200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672081200000,
+     "end": 1672082100000,
+     "status": "closed"
+    },
+    {
+     "start": 1672082100000,
+     "end": 1672124400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672124400000,
+     "end": 1672146000000,
+     "status": "closed"
+    },
+    {
+     "start": 1672146000000,
+     "end": 1672167600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672167600000,
+     "end": 1672168500000,
+     "status": "closed"
+    },
+    {
+     "start": 1672168500000,
+     "end": 1672210800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672210800000,
+     "end": 1672232400000,
+     "status": "closed"
+    },
+    {
+     "start": 1672232400000,
+     "end": 1672254000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672254000000,
+     "end": 1672254900000,
+     "status": "closed"
+    },
+    {
+     "start": 1672254900000,
+     "end": 1672297200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672297200000,
+     "end": 1672318800000,
+     "status": "closed"
+    },
+    {
+     "start": 1672318800000,
+     "end": 1672340400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672340400000,
+     "end": 1672341300000,
+     "status": "closed"
+    },
+    {
+     "start": 1672341300000,
+     "end": 1672383600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672383600000,
+     "end": 1672405200000,
+     "status": "closed"
+    },
+    {
+     "start": 1672405200000,
+     "end": 1672426800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672426800000,
+     "end": 1672427700000,
+     "status": "closed"
+    },
+    {
+     "start": 1672427700000,
+     "end": 1672470000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672470000000,
+     "end": 1672502400000,
+     "status": "closed"
+    },
+    {
+     "start": 1672502400000,
+     "end": 1672522200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672522200000,
+     "end": 1672523100000,
+     "status": "closed"
+    },
+    {
+     "start": 1672523100000,
+     "end": 1672556400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672556400000,
+     "end": 1672588800000,
+     "status": "closed"
+    },
+    {
+     "start": 1672588800000,
+     "end": 1672608600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672608600000,
+     "end": 1672609500000,
+     "status": "closed"
+    },
+    {
+     "start": 1672609500000,
+     "end": 1672642800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672642800000,
+     "end": 1672664400000,
+     "status": "closed"
+    },
+    {
+     "start": 1672664400000,
+     "end": 1672686000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672686000000,
+     "end": 1672686900000,
+     "status": "closed"
+    },
+    {
+     "start": 1672686900000,
+     "end": 1672729200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672729200000,
+     "end": 1672750800000,
+     "status": "closed"
+    },
+    {
+     "start": 1672750800000,
+     "end": 1672772400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672772400000,
+     "end": 1672773300000,
+     "status": "closed"
+    },
+    {
+     "start": 1672773300000,
+     "end": 1672815600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672815600000,
+     "end": 1672837200000,
+     "status": "closed"
+    },
+    {
+     "start": 1672837200000,
+     "end": 1672858800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672858800000,
+     "end": 1672859700000,
+     "status": "closed"
+    },
+    {
+     "start": 1672859700000,
+     "end": 1672902000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672902000000,
+     "end": 1672923600000,
+     "status": "closed"
+    },
+    {
+     "start": 1672923600000,
+     "end": 1672945200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1672945200000,
+     "end": 1672946100000,
+     "status": "closed"
+    },
+    {
+     "start": 1672946100000,
+     "end": 1672988400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1672988400000,
+     "end": 1673010000000,
+     "status": "closed"
+    },
+    {
+     "start": 1673010000000,
+     "end": 1673031600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673031600000,
+     "end": 1673032500000,
+     "status": "closed"
+    },
+    {
+     "start": 1673032500000,
+     "end": 1673074800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673074800000,
+     "end": 1673107200000,
+     "status": "closed"
+    },
+    {
+     "start": 1673107200000,
+     "end": 1673127000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673127000000,
+     "end": 1673127900000,
+     "status": "closed"
+    },
+    {
+     "start": 1673127900000,
+     "end": 1673161200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673161200000,
+     "end": 1673193600000,
+     "status": "closed"
+    },
+    {
+     "start": 1673193600000,
+     "end": 1673213400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673213400000,
+     "end": 1673214300000,
+     "status": "closed"
+    },
+    {
+     "start": 1673214300000,
+     "end": 1673247600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673247600000,
+     "end": 1673269200000,
+     "status": "closed"
+    },
+    {
+     "start": 1673269200000,
+     "end": 1673290800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673290800000,
+     "end": 1673291700000,
+     "status": "closed"
+    },
+    {
+     "start": 1673291700000,
+     "end": 1673334000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673334000000,
+     "end": 1673355600000,
+     "status": "closed"
+    },
+    {
+     "start": 1673355600000,
+     "end": 1673377200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673377200000,
+     "end": 1673378100000,
+     "status": "closed"
+    },
+    {
+     "start": 1673378100000,
+     "end": 1673420400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673420400000,
+     "end": 1673442000000,
+     "status": "closed"
+    },
+    {
+     "start": 1673442000000,
+     "end": 1673463600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673463600000,
+     "end": 1673464500000,
+     "status": "closed"
+    },
+    {
+     "start": 1673464500000,
+     "end": 1673506800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673506800000,
+     "end": 1673528400000,
+     "status": "closed"
+    },
+    {
+     "start": 1673528400000,
+     "end": 1673550000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673550000000,
+     "end": 1673550900000,
+     "status": "closed"
+    },
+    {
+     "start": 1673550900000,
+     "end": 1673593200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673593200000,
+     "end": 1673614800000,
+     "status": "closed"
+    },
+    {
+     "start": 1673614800000,
+     "end": 1673636400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673636400000,
+     "end": 1673637300000,
+     "status": "closed"
+    },
+    {
+     "start": 1673637300000,
+     "end": 1673679600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673679600000,
+     "end": 1673712000000,
+     "status": "closed"
+    },
+    {
+     "start": 1673712000000,
+     "end": 1673731800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673731800000,
+     "end": 1673732700000,
+     "status": "closed"
+    },
+    {
+     "start": 1673732700000,
+     "end": 1673766000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673766000000,
+     "end": 1673798400000,
+     "status": "closed"
+    },
+    {
+     "start": 1673798400000,
+     "end": 1673818200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673818200000,
+     "end": 1673819100000,
+     "status": "closed"
+    },
+    {
+     "start": 1673819100000,
+     "end": 1673852400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673852400000,
+     "end": 1673874000000,
+     "status": "closed"
+    },
+    {
+     "start": 1673874000000,
+     "end": 1673895600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673895600000,
+     "end": 1673896500000,
+     "status": "closed"
+    },
+    {
+     "start": 1673896500000,
+     "end": 1673938800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1673938800000,
+     "end": 1673960400000,
+     "status": "closed"
+    },
+    {
+     "start": 1673960400000,
+     "end": 1673982000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1673982000000,
+     "end": 1673982900000,
+     "status": "closed"
+    },
+    {
+     "start": 1673982900000,
+     "end": 1674025200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674025200000,
+     "end": 1674046800000,
+     "status": "closed"
+    },
+    {
+     "start": 1674046800000,
+     "end": 1674068400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674068400000,
+     "end": 1674069300000,
+     "status": "closed"
+    },
+    {
+     "start": 1674069300000,
+     "end": 1674111600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674111600000,
+     "end": 1674133200000,
+     "status": "closed"
+    },
+    {
+     "start": 1674133200000,
+     "end": 1674154800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674154800000,
+     "end": 1674155700000,
+     "status": "closed"
+    },
+    {
+     "start": 1674155700000,
+     "end": 1674198000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674198000000,
+     "end": 1674219600000,
+     "status": "closed"
+    },
+    {
+     "start": 1674219600000,
+     "end": 1674241200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674241200000,
+     "end": 1674242100000,
+     "status": "closed"
+    },
+    {
+     "start": 1674242100000,
+     "end": 1674284400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674284400000,
+     "end": 1674316800000,
+     "status": "closed"
+    },
+    {
+     "start": 1674316800000,
+     "end": 1674336600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674336600000,
+     "end": 1674337500000,
+     "status": "closed"
+    },
+    {
+     "start": 1674337500000,
+     "end": 1674370800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674370800000,
+     "end": 1674403200000,
+     "status": "closed"
+    },
+    {
+     "start": 1674403200000,
+     "end": 1674423000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674423000000,
+     "end": 1674423900000,
+     "status": "closed"
+    },
+    {
+     "start": 1674423900000,
+     "end": 1674457200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674457200000,
+     "end": 1674478800000,
+     "status": "closed"
+    },
+    {
+     "start": 1674478800000,
+     "end": 1674500400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674500400000,
+     "end": 1674501300000,
+     "status": "closed"
+    },
+    {
+     "start": 1674501300000,
+     "end": 1674543600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674543600000,
+     "end": 1674565200000,
+     "status": "closed"
+    },
+    {
+     "start": 1674565200000,
+     "end": 1674586800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674586800000,
+     "end": 1674587700000,
+     "status": "closed"
+    },
+    {
+     "start": 1674587700000,
+     "end": 1674630000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674630000000,
+     "end": 1674651600000,
+     "status": "closed"
+    },
+    {
+     "start": 1674651600000,
+     "end": 1674673200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674673200000,
+     "end": 1674674100000,
+     "status": "closed"
+    },
+    {
+     "start": 1674674100000,
+     "end": 1674716400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674716400000,
+     "end": 1674738000000,
+     "status": "closed"
+    },
+    {
+     "start": 1674738000000,
+     "end": 1674759600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674759600000,
+     "end": 1674760500000,
+     "status": "closed"
+    },
+    {
+     "start": 1674760500000,
+     "end": 1674802800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674802800000,
+     "end": 1674824400000,
+     "status": "closed"
+    },
+    {
+     "start": 1674824400000,
+     "end": 1674846000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674846000000,
+     "end": 1674846900000,
+     "status": "closed"
+    },
+    {
+     "start": 1674846900000,
+     "end": 1674889200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674889200000,
+     "end": 1674921600000,
+     "status": "closed"
+    },
+    {
+     "start": 1674921600000,
+     "end": 1674941400000,
+     "status": "southbound"
+    },
+    {
+     "start": 1674941400000,
+     "end": 1674942300000,
+     "status": "closed"
+    },
+    {
+     "start": 1674942300000,
+     "end": 1674975600000,
+     "status": "northbound"
+    },
+    {
+     "start": 1674975600000,
+     "end": 1675008000000,
+     "status": "closed"
+    },
+    {
+     "start": 1675008000000,
+     "end": 1675027800000,
+     "status": "southbound"
+    },
+    {
+     "start": 1675027800000,
+     "end": 1675028700000,
+     "status": "closed"
+    },
+    {
+     "start": 1675028700000,
+     "end": 1675062000000,
+     "status": "northbound"
+    },
+    {
+     "start": 1675062000000,
+     "end": 1675083600000,
+     "status": "closed"
+    },
+    {
+     "start": 1675083600000,
+     "end": 1675105200000,
+     "status": "southbound"
+    },
+    {
+     "start": 1675105200000,
+     "end": 1675106100000,
+     "status": "closed"
+    },
+    {
+     "start": 1675106100000,
+     "end": 1675148400000,
+     "status": "northbound"
+    },
+    {
+     "start": 1675148400000,
+     "end": 1675170000000,
+     "status": "closed"
+    },
+    {
+     "start": 1675170000000,
+     "end": 1675191600000,
+     "status": "southbound"
+    },
+    {
+     "start": 1675191600000,
+     "end": 1675192500000,
+     "status": "closed"
+    },
+    {
+     "start": 1675192500000,
+     "end": 1675234800000,
+     "status": "northbound"
+    },
+    {
+     "start": 1675234800000,
+     "end": 1675256400000,
+     "status": "closed"
+    },
+    {
+     "start": 1675256400000,
+     "end": 1675278000000,
+     "status": "southbound"
+    },
+    {
+     "start": 1675278000000,
+     "end": 1675278900000,
+     "status": "closed"
+    },
+    {
+     "start": 1675278900000,
+     "end": 1675321200000,
+     "status": "northbound"
+    },
+    {
+     "start": 1675321200000,
+     "end": 1675324800000,
+     "status": "closed"
+    }
+   ],
+   "doubts": [
+    {
+     "start": 1670266800000,
+     "end": 1670526000000,
+     "title": "Southbound for winter weather: might last longer",
+     "detail": "WSDOT doesn't say exactly when this ends. Southbound through the Monday morning commute. WSDOT would decide Monday morning whether the lanes reverse to northbound as usual.",
+     "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes",
+     "source": "page"
+    }
+   ],
+   "notices": [
+    {
+     "title": "Southbound for winter weather",
+     "detail": "Express lanes stay southbound for winter weather\nBeginning at 8 p.m. on Friday, Dec. 2, the I-5 Express Lanes will switch to the southbound direction and remain open in that configuration until Monday, Dec. 5 due to expected winter weather in the forecast. Weather conditions will be reassessed on Monday morning to determine whether there will be a normally scheduled weekday reversal to northbound. Please check back on this page often for updates.",
+     "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes",
+     "kind": "southbound",
+     "spans": [
+      {
+       "start": 1670040000000,
+       "end": 1670266800000
+      }
+     ],
+     "startCertainty": "exact",
+     "endCertainty": "unknown",
+     "source": "page"
+    },
+    {
+     "title": "Closing early at 8 p.m.",
+     "detail": "Express lanes close early\nThe I-5 Express Lanes will close early at 8 p.m. on the following dates to facilitate roadwork within the lanes:\nDec. 5 - 8,\nDec. 12 - 15, and\nDec. 19 - 22",
+     "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes",
+     "kind": "closed",
+     "spans": [
+      {
+       "start": 1670299200000,
+       "end": 1670331600000
+      },
+      {
+       "start": 1670385600000,
+       "end": 1670418000000
+      },
+      {
+       "start": 1670472000000,
+       "end": 1670504400000
+      },
+      {
+       "start": 1670558400000,
+       "end": 1670590800000
+      },
+      {
+       "start": 1670904000000,
+       "end": 1670936400000
+      },
+      {
+       "start": 1670990400000,
+       "end": 1671022800000
+      },
+      {
+       "start": 1671076800000,
+       "end": 1671109200000
+      },
+      {
+       "start": 1671163200000,
+       "end": 1671195600000
+      },
+      {
+       "start": 1671508800000,
+       "end": 1671541200000
+      },
+      {
+       "start": 1671595200000,
+       "end": 1671627600000
+      },
+      {
+       "start": 1671681600000,
+       "end": 1671714000000
+      },
+      {
+       "start": 1671768000000,
+       "end": 1671800400000
+      }
+     ],
+     "startCertainty": "exact",
+     "endCertainty": "exact",
+     "source": "page"
+    }
+   ],
+   "page": {
+    "kind": "page",
+    "hash": "69c05e0c55fdb400",
+    "firstSeen": 1670083820000,
+    "models": [
+     "gemini-4-hydrogen",
+     "gpt-oss-120b"
+    ],
+    "status": "answered",
+    "link": "https://wsdot.wa.gov/travel/roads-bridges/express-lanes"
+   },
+   "alerts": []
+  },
+  "fetchedAt": 1670083820000,
+  "checkedAt": 1670083820000,
+  "error": null,
+  "live": null,
+  "current": {
+   "at": 1670084420000,
+   "verdict": "confident",
+   "scheduled": "southbound",
+   "shown": "southbound",
+   "next": {
+    "at": 1670266800000,
+    "to": "closed"
+   },
+   "nextText": "Closes at 11:00 AM Mon",
+   "concerns": []
+  }
+ }
+}

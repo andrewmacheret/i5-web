@@ -21,8 +21,10 @@ export function dayName(ms: number, now: number): string {
   return WEEKDAYS[Seattle.weekday(day)];
 }
 
-/** "9:00 PM", "5:00 AM tomorrow", "8:00 AM Sat" */
+/** "9:00 PM", "5:00 AM tomorrow", "8:00 AM Sat", or "8:00 AM Sat, Dec 12" once it's a week or more away */
 export function when(ms: number, now: number): string {
+  const diff = Seattle.daysBetween(Seattle.day(now), Seattle.day(ms));
+  if (diff >= 7 || diff <= -7) return `${clock(ms)} ${shortDate(ms)}`;
   const day = dayName(ms, now);
   if (day === 'Today') return clock(ms);
   return `${clock(ms)} ${day === 'Tomorrow' ? 'tomorrow' : day}`;

@@ -6,6 +6,6 @@ export default defineConfig({
   // relative paths so the build works under andrewmacheret.com/projects/i5/
   base: './',
   test: {
-    include: ['test/**/*.test.ts'],
+    include: ['test/**/*.test.{ts,tsx}'],
   },
 });

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { API_URL, PAGE_URL } from './api.ts';
 import { Card } from './parts.tsx';
 
 type Kind = 'badge' | 'badge-square' | 'icon';
@@ -10,13 +9,13 @@ const KINDS: { id: Kind; label: string }[] = [
   { id: 'icon', label: 'Icon' },
 ];
 
-function imageUrl(kind: Kind, time: boolean): string {
-  if (kind === 'icon') return `${API_URL}/icon.svg?size=40`;
+function imageUrl(apiUrl: string, kind: Kind, time: boolean): string {
+  if (kind === 'icon') return `${apiUrl}/icon.svg?size=40`;
   const q = new URLSearchParams();
   if (kind === 'badge-square') q.set('style', 'flat-square');
   if (!time) q.set('time', '0');
   const s = q.toString();
-  return `${API_URL}/badge.svg${s ? `?${s}` : ''}`;
+  return `${apiUrl}/badge.svg${s ? `?${s}` : ''}`;
 }
 
 function CopyRow({ label, text }: { label: string; text: string }) {
@@ -42,10 +41,10 @@ function CopyRow({ label, text }: { label: string; text: string }) {
 }
 
 /** Lets other sites show the live status, the way GitHub READMEs show build badges */
-export default function BadgeMaker() {
+export default function BadgeMaker({ apiUrl, pageUrl }: { apiUrl: string; pageUrl: string }) {
   const [kind, setKind] = useState<Kind>('badge');
   const [time, setTime] = useState(true);
-  const src = imageUrl(kind, time);
+  const src = imageUrl(apiUrl, kind, time);
   const alt = 'I-5 express lanes status';
   return (
     <Card title="Badge for your site" className="badge-maker">
@@ -76,12 +75,12 @@ export default function BadgeMaker() {
         )}
       </div>
       <div className="badge-preview">
-        <a href={PAGE_URL}>
+        <a href={pageUrl}>
           <img src={src} alt={alt} />
         </a>
       </div>
-      <CopyRow label="Markdown" text={`[![${alt}](${src})](${PAGE_URL})`} />
-      <CopyRow label="HTML" text={`<a href="${PAGE_URL}"><img src="${src}" alt="${alt}"></a>`} />
+      <CopyRow label="Markdown" text={`[![${alt}](${src})](${pageUrl})`} />
+      <CopyRow label="HTML" text={`<a href="${pageUrl}"><img src="${src}" alt="${alt}"></a>`} />
     </Card>
   );
 }

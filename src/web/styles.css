@@ -260,6 +260,10 @@ h3 {
   background: transparent;
 }
 
+.segment.unknown {
+  background: repeating-linear-gradient(135deg, transparent 0 4px, var(--glass-border) 4px 8px);
+}
+
 .now-marker {
   position: absolute;
   top: -3px;
@@ -394,6 +398,13 @@ h3 {
 
 .planned-item .detail {
   white-space: pre-line;
+}
+
+.planned-item details summary {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .schedule-row {

@@ -1,5 +1,7 @@
-// Everything here is plain JSON, so the Lambda can send it to the page as is.
+// What the server publishes and the page draws. Everything here is plain JSON.
 // Moments are epoch milliseconds. Days are Seattle calendar days like "2026-11-18".
+// The page repo (i5-client) has a copy of this file and of timeline.ts, trust.ts, snapshot.ts,
+// seattle.ts and format.ts. Change both together.
 
 export type LaneStatus = 'northbound' | 'southbound' | 'closed' | 'unknown';
 
@@ -44,7 +46,7 @@ export interface WeeklySchedule {
   weekend: LaneWindow[];
 }
 
-/** The schedule WSDOT posted as of Nov 2026. Used when the page can't be read. */
+/** The schedule WSDOT posted as of Nov 2026. Used when the page lists none. */
 export const BUILT_IN_SCHEDULE: WeeklySchedule = {
   weekday: [
     { status: 'southbound', start: hm(5), end: hm(11) },
@@ -59,97 +61,94 @@ export const BUILT_IN_SCHEDULE: WeeklySchedule = {
 /** A calendar day in Seattle, "YYYY-MM-DD". Sorts and compares as a string. */
 export type DayKey = string;
 
-/** A full closure over a date range, like a weekend-long closure. */
-export interface Closure {
-  title: string;
+/** A stretch of time with one status. Published segments cover the horizon with no gaps. */
+export interface Segment {
   start: number;
   end: number;
+  status: LaneStatus;
 }
 
-/** The days something applies to. `last: null` means it has no end date. */
-export interface DayRange {
-  first: DayKey;
-  last: DayKey | null;
-}
+export type SourceKind = 'page' | 'alert' | 'holiday' | 'models';
 
-export const rangeContains = (r: DayRange, day: DayKey) => r.first <= day && (r.last === null || day <= r.last);
-
-export const rangeIsOver = (r: DayRange, today: DayKey) => r.last !== null && r.last < today;
-
-export interface SpecialEvent {
+/** A stretch of time the server can't vouch for, with the reason */
+export interface Doubt {
+  start: number;
+  end: number;
   title: string;
   detail: string;
   link: string | null;
-  /** Days the event mentions. Null when it has no dates we could read. */
-  days: DayRange | null;
-  /** Set when we could read exact start and end times for a full closure. */
-  closure: Closure | null;
+  source: SourceKind;
+  /** True while a new page or alert is still being read, which usually clears up within minutes */
+  checking?: boolean;
 }
 
-export interface Advisory {
-  text: string;
+export type ChangeKind = 'northbound' | 'southbound' | 'closed' | 'weekday_schedule' | 'weekend_schedule' | 'other' | 'unclear';
+
+export type Certainty = 'exact' | 'approximate' | 'unknown';
+
+/** One notice from the page or an alert, for the page's lists */
+export interface Notice {
+  title: string;
+  /** The page's own words */
+  detail: string;
   link: string | null;
-  /** Days the notice mentions. Null when it has no dates we could read. */
-  days: DayRange | null;
+  kind: ChangeKind;
+  spans: { start: number | null; end: number | null }[];
+  startCertainty: Certainty;
+  endCertainty: Certainty;
+  source: 'page' | 'alert';
 }
 
-/** True when the notice only talks about days that are already over. */
-export const advisoryIsOver = (a: Advisory, today: DayKey) => (a.days ? rangeIsOver(a.days, today) : false);
-
-export interface EarlyClose {
-  day: DayKey;
-  /** Null when the page didn't say what time */
-  time: TimeOfDay | null;
+/** A page version or alert the server has read */
+export interface DocumentInfo {
+  kind: 'page' | 'alert';
+  hash: string;
+  /** When the server first saw this version */
+  firstSeen: number;
+  /** Models whose answers were used, or "reviewed" for an answer a person wrote */
+  models: string[];
+  status: 'answered' | 'pending' | 'failed';
+  link: string | null;
 }
 
-export interface ExpressLanesInfo {
-  schedule: WeeklySchedule;
-  /** False when the page's schedule couldn't be read and the built-in one is used. */
-  scheduleFromPage: boolean;
-  earlyCloses: EarlyClose[];
-  events: SpecialEvent[];
-  advisories: Advisory[];
-  /** Bits of the page that looked important but couldn't be read */
-  warnings: string[];
+/** What the server worked out from WSDOT's page and alerts */
+export interface Published {
+  publishedAt: number;
+  /** Segments cover exactly this range */
+  horizon: { start: number; end: number };
+  /** The weekly schedule as the page lists it, or null when it lists none */
+  schedule: WeeklySchedule | null;
+  segments: Segment[];
+  doubts: Doubt[];
+  notices: Notice[];
+  page: DocumentInfo | null;
+  alerts: DocumentInfo[];
 }
 
-export function builtInInfo(warnings: string[] = []): ExpressLanesInfo {
-  return {
-    schedule: BUILT_IN_SCHEDULE,
-    scheduleFromPage: false,
-    earlyCloses: [],
-    events: [],
-    advisories: [],
-    warnings,
-  };
+/** WSDOT's travel times through the express lanes, which only exist in the direction they're open */
+export interface LiveReading {
+  /** When WSDOT measured it */
+  at: number;
+  /** Minutes from Seattle to Everett through the express lanes, or null when there's no measurement */
+  northbound: number | null;
+  southbound: number | null;
 }
 
-export const closuresOf = (info: ExpressLanesInfo): Closure[] =>
-  info.events.flatMap((e) => (e.closure ? [e.closure] : []));
-
-export const earlyCloseOn = (info: ExpressLanesInfo, day: DayKey) => info.earlyCloses.find((e) => e.day === day);
-
-export type DataSource =
-  /** Read from WSDOT on the last try, at this time */
-  | { kind: 'live'; at: number }
-  /** The last try failed, so this is the last good copy, read at this time */
-  | { kind: 'cached'; at: number }
-  /** Nothing good saved, using the schedule baked into the app */
-  | { kind: 'builtIn' };
-
-export interface FetchResult {
-  info: ExpressLanesInfo;
-  source: DataSource;
+/** GET /status */
+export interface ServerStatus {
+  published: Published | null;
+  /** When the server last read WSDOT's page successfully */
+  fetchedAt: number | null;
+  /** When the server last tried */
+  checkedAt: number | null;
+  /** Why the last try failed */
   error: string | null;
-  /** WSDOT's page loaded but couldn't be read */
-  pageChanged: boolean;
+  live: LiveReading | null;
 }
-
-export const fetchedAt = (s: DataSource) => (s.kind === 'builtIn' ? null : s.at);
 
 export const SOURCES = {
   expressLanes: 'https://wsdot.wa.gov/travel/roads-bridges/express-lanes',
-  reviveI5: 'https://wsdot.wa.gov/construction-planning/search-projects/revive-i-5-preserving-vital-freeway',
+  alerts: 'https://wsdot.com/travel/real-time/alerts',
   travelMap: 'https://wsdot.com/travel/real-time/map/',
   wsdotTrafficX: 'https://x.com/wsdot_traffic',
 };
