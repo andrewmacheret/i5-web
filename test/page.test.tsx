@@ -71,7 +71,7 @@ describe('the page', () => {
     expect(text).toContain('Weekend-long full closure');
     expect(text).toContain('Start time is approximate.');
     expect(text).toContain('Closing early at 9 p.m.');
-    expect(text).toMatch(/Wed, Dec 2 9:00 PM → Thu, Dec 3 5:00 AM/);
+    expect(html).toContain('<li>Wed, Dec 2 9:00 PM → Thu, Dec 3 5:00 AM</li>');
     expect(text).toContain("WSDOT's words");
     expect(text).toContain("WSDOT's alert");
     expect(html).toContain('https://wsdot.com/travel/real-time/map/?alertId=727762');

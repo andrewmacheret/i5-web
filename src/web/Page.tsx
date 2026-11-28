@@ -268,10 +268,12 @@ function Planned({ snap }: { snap: Snapshot }) {
         return (
           <div key={`${n.source}-${n.title}`} className="planned-item">
             <h3>{n.title}</h3>
-            <p className="times">
-              {spans.slice(0, MAX_TIMES).map(spanText).join('  ·  ')}
-              {spans.length > MAX_TIMES && `  ·  and ${spans.length - MAX_TIMES} more`}
-            </p>
+            <ul className="times">
+              {spans.slice(0, MAX_TIMES).map((s, i) => (
+                <li key={i}>{spanText(s)}</li>
+              ))}
+              {spans.length > MAX_TIMES && <li>and {spans.length - MAX_TIMES} more</li>}
+            </ul>
             {note && <p className="warn-text">{note}</p>}
             <details>
               <summary>{n.source === 'alert' ? "WSDOT's alert" : "WSDOT's words"}</summary>
