@@ -81,6 +81,20 @@ describe('the page', () => {
     expect(html).toContain('aria-label="Tomorrow: Southbound 5 AM to 11 AM, Northbound 11:15 AM to 9 PM"');
   });
 
+  it('compares the express lanes with the regular lanes', () => {
+    const { text } = page('confident');
+    expect(text).toContain('Travel times Express lanes Regular lanes');
+    expect(text).toContain('Seattle → Everett 18 min · saves 8 min 26 min · usually 22');
+    expect(text).toContain('Everett → Seattle — 15 min · usually 16');
+    expect(text).toContain("Downtown Seattle to Everett, from WSDOT's sensors at 3:00 PM. A dash means the express lanes aren't open that way.");
+  });
+
+  it('leaves out travel times from old readings without them, or once they are 30 minutes old', () => {
+    expect(page('holiday').text).not.toContain('Travel times');
+    const f = fixture('confident');
+    expect(render(f.status, f.at + 31 * 60_000).text).not.toContain('Travel times');
+  });
+
   it("can't confirm the day after Thanksgiving, with no holiday notice", () => {
     const { text } = page('holiday');
     expect(text).toContain("Can't confirm");

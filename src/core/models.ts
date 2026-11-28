@@ -132,6 +132,18 @@ export interface LiveReading {
   /** Minutes from Seattle to Everett through the express lanes, or null when there's no measurement */
   northbound: number | null;
   southbound: number | null;
+  /** Downtown Seattle to Everett and back, express lanes against the regular lanes. Missing in old readings. */
+  trips?: { northbound: TripTimes; southbound: TripTimes };
+}
+
+/** Minutes for one trip. Null when WSDOT measured nothing. */
+export interface TripTimes {
+  /** Through the express lanes. Null while they're closed or run the other way. */
+  express: number | null;
+  /** On the regular lanes */
+  regular: number | null;
+  /** What the regular lanes usually take at this time of day */
+  usual: number | null;
 }
 
 /** GET /status */
@@ -149,6 +161,8 @@ export interface ServerStatus {
 export const SOURCES = {
   expressLanes: 'https://wsdot.wa.gov/travel/roads-bridges/express-lanes',
   alerts: 'https://wsdot.com/travel/real-time/alerts',
-  travelMap: 'https://wsdot.com/Travel/Real-time/Map/',
+  /** The travel map on the express lanes, with cameras, traffic and alerts on */
+  travelMap:
+    'https://wsdot.com/Travel/Real-time/Map/?layers=traffic-flow%2Calert%2Ccamera&base=wsdot&extent=-122.40%2C47.595%2C-122.25%2C47.715&fromLink=true',
   wsdotTrafficX: 'https://x.com/wsdot_traffic',
 };

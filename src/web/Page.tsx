@@ -1,8 +1,9 @@
 import * as Format from '../core/format.ts';
-import { BUILT_IN_SCHEDULE, type Notice, type ServerStatus, SOURCES, TITLES } from '../core/models.ts';
+import { BUILT_IN_SCHEDULE, type Notice, type ServerStatus, SOURCES, TITLES, type TripTimes } from '../core/models.ts';
 import * as Seattle from '../core/seattle.ts';
 import { doubtsBetween } from '../core/timeline.ts';
 import { type Snapshot, verb } from '../core/snapshot.ts';
+import { LIVE_MAX_AGE } from '../core/trust.ts';
 import BadgeMaker from './BadgeMaker.tsx';
 import { Callout, Card, Dot, Icon, ScheduleRows, SourceLink, StatusIcon, Timeline } from './parts.tsx';
 
@@ -53,6 +54,7 @@ export function Page({ snap, loaded, loadError, refreshing, preview, onRefresh, 
 
       <Notices snap={snap} />
       <Timelines snap={snap} />
+      <TravelTimes snap={snap} />
       <ComingUp snap={snap} />
       <Planned snap={snap} />
       <RegularSchedule snap={snap} />
@@ -172,6 +174,53 @@ function Notices({ snap }: { snap: Snapshot }) {
         );
       })}
     </div>
+  );
+}
+
+/** Express lanes against the regular lanes, from WSDOT's sensors */
+function TravelTimes({ snap }: { snap: Snapshot }) {
+  const live = snap.status.live;
+  if (!live?.trips || snap.now - live.at > LIVE_MAX_AGE) return null;
+  const rows: { label: string; t: TripTimes }[] = [
+    { label: 'Seattle → Everett', t: live.trips.northbound },
+    { label: 'Everett → Seattle', t: live.trips.southbound },
+  ];
+  if (rows.every(({ t }) => t.express === null && t.regular === null)) return null;
+  const min = (m: number | null) => (m === null ? '—' : `${m} min`);
+  return (
+    <Card title="Travel times" className="travel-times">
+      <table>
+        <thead>
+          <tr>
+            <td />
+            <th scope="col">Express lanes</th>
+            <th scope="col">Regular lanes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ label, t }) => {
+            const saves = t.express !== null && t.regular !== null ? t.regular - t.express : 0;
+            return (
+              <tr key={label}>
+                <th scope="row">{label}</th>
+                <td>
+                  {min(t.express)}
+                  {saves >= 2 && <span className="saves"> · saves {saves} min</span>}
+                </td>
+                <td>
+                  {min(t.regular)}
+                  {t.usual !== null && <span className="usual"> · usually {t.usual}</span>}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p className="hint">
+        Downtown Seattle to Everett, from WSDOT's sensors at {Format.clock(live.at)}.
+        {rows.some(({ t }) => t.express === null) && " A dash means the express lanes aren't open that way."}
+      </p>
+    </Card>
   );
 }
 

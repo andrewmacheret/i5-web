@@ -260,6 +260,38 @@ h3 {
   background: transparent;
 }
 
+.travel-times table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.travel-times th,
+.travel-times td {
+  padding: 0.3rem 0;
+  text-align: left;
+}
+
+.travel-times thead th {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.travel-times tbody th {
+  font-weight: 600;
+}
+
+.travel-times .saves {
+  color: var(--north-text);
+  font-size: 0.85rem;
+}
+
+.travel-times .usual {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
 .segment.unknown {
   background: repeating-linear-gradient(135deg, transparent 0 4px, var(--glass-border) 4px 8px);
 }

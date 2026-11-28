@@ -1420,7 +1420,19 @@
   "live": {
    "at": 1796166000000,
    "northbound": 18,
-   "southbound": 0
+   "southbound": 0,
+   "trips": {
+    "northbound": {
+     "express": 18,
+     "regular": 26,
+     "usual": 22
+    },
+    "southbound": {
+     "express": null,
+     "regular": 15,
+     "usual": 16
+    }
+   }
   },
   "current": {
    "at": 1796166000000,
