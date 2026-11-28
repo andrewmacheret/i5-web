@@ -326,6 +326,35 @@ h3 {
 }
 
 .camera-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.camera-reload {
+  display: flex;
+  padding: 0.3rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.camera-reload:hover {
+  background: var(--closed-bar);
+  color: inherit;
+}
+
+.camera-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 335 / 244;
+  border-radius: 6px;
+  background: var(--closed-bar);
   color: var(--muted);
   font-size: 0.8rem;
 }

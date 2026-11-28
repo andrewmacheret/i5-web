@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { ServerStatus } from '../src/core/models.ts';
 import { makeSnapshot } from '../src/core/snapshot.ts';
-import { CameraGrid, cameraMapLink } from '../src/web/Cameras.tsx';
+import { CameraGrid, cameraImageUrl, cameraMapLink, RETRY_DELAYS } from '../src/web/Cameras.tsx';
 import { Page } from '../src/web/Page.tsx';
 
 // Renders the page from real /status responses. The fixtures come from i5-server-lambdas, made
@@ -203,6 +203,18 @@ describe('cameras', () => {
     expect(html).toContain('MP 168 ·');
     expect(grid(f.at + 60_000)).toBe(html);
     expect(grid(f.at + 5 * 60_000)).not.toBe(html);
+  });
+
+  it('each have a reload button', () => {
+    const html = renderToStaticMarkup(<CameraGrid cameras={cameras.slice(1, 2)} now={f.at} />);
+    expect(html).toContain('aria-label="Reload the picture from Roanoke St Express Lanes"');
+  });
+
+  it('retry a picture three times, waiting longer each time, with a new address each try', () => {
+    expect(RETRY_DELAYS).toEqual([5_000, 15_000, 45_000]);
+    const c = cameras[0];
+    expect(cameraImageUrl(c, 100)).toBe(`${c.image}?v=100`);
+    expect(cameraImageUrl(c, 100, 2)).toBe(`${c.image}?v=100-2`);
   });
 
   it('link to the travel map zoomed in on the camera', () => {
