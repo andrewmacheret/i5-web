@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Camera } from '../core/models.ts';
 import { Card } from './parts.tsx';
 
 // Pictures come straight from WSDOT's image server. Nothing loads until the section is opened.
 
 const MAP = 'https://wsdot.com/Travel/Real-time/Map/';
+export const CAMERAS_ID = 'cameras';
+
+/** Opens the section, for links to #cameras. The browser then scrolls to it. */
+export function openCameras() {
+  const details = document.getElementById(CAMERAS_ID);
+  if (details instanceof HTMLDetailsElement) details.open = true;
+}
+
 /** WSDOT updates each picture about this often */
 const REFRESH_EVERY = 5 * 60_000;
 
@@ -37,12 +45,21 @@ export function CameraGrid({ cameras, now }: { cameras: Camera[]; now: number })
 export default function Cameras({ cameras, now }: { cameras: Camera[]; now: number }) {
   const [open, setOpen] = useState(false);
   const [all, setAll] = useState(false);
-  if (!cameras.length) return null;
+  const details = useRef<HTMLDetailsElement>(null);
+  const hasCameras = cameras.length > 0;
+  // A link to #cameras from another page lands before the cameras load, so open and scroll here
+  useEffect(() => {
+    if (hasCameras && location.hash === `#${CAMERAS_ID}` && details.current) {
+      details.current.open = true;
+      details.current.scrollIntoView();
+    }
+  }, [hasCameras]);
+  if (!hasCameras) return null;
   const express = cameras.filter((c) => c.express);
   const shown = all || !express.length ? cameras : express;
   return (
     <Card title="Cameras" className="cameras">
-      <details onToggle={(e) => setOpen(e.currentTarget.open)}>
+      <details id={CAMERAS_ID} ref={details} onToggle={(e) => setOpen(e.currentTarget.open)}>
         <summary>
           {`${open ? 'Hide' : 'Show'} ${express.length ? `${express.length} express lane cameras` : `${cameras.length} cameras`}, downtown to Northgate`}
         </summary>

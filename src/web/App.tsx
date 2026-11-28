@@ -13,9 +13,12 @@ const clock = () => Date.now() + offset;
 
 const EMPTY: ServerStatus = { published: null, fetchedAt: null, checkedAt: null, error: null, live: null };
 
-/** With ?now=, move the server's read times along with the clock so the data doesn't look old */
+/**
+ * With ?now=, move the server's read times along with the clock so the data doesn't look old.
+ * A local API started with --at already runs on that clock, so its data is left alone.
+ */
 const shifted = (s: ServerStatus): ServerStatus =>
-  offset === 0
+  offset === 0 || (s.checkedAt !== null && Math.abs(s.checkedAt - clock()) < 60 * 60_000)
     ? s
     : {
         ...s,

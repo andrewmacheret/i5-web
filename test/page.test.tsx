@@ -103,6 +103,16 @@ describe('the page', () => {
     expect(text).toContain("Expected northbound, but don't rely on it");
     expect(text).toContain('No word yet on Thanksgiving');
     expect(text).toContain('Check a live source before you drive: WSDOT Traffic on Bluesky · Traffic cameras · WSDOT page');
+    expect(html).toContain('>Traffic cameras</a>');
+    expect(html).toContain('href="https://wsdot.com/Travel/Real-time/Map/?layers=');
+  });
+
+  it('sends "Traffic cameras" to the Cameras section when the server sent cameras', () => {
+    const f = fixture('holiday');
+    const cameras = fixture('confident').status?.cameras;
+    const { html } = render(f.status && { ...f.status, cameras }, f.at);
+    expect(html).toContain('<a href="#cameras">Traffic cameras</a>');
+    expect(html).toContain('<details id="cameras">');
   });
 
   it('says it is checking while the models read a new page', () => {
@@ -176,7 +186,7 @@ describe('cameras', () => {
   it('start closed, offering the express lane ones, so no pictures load', () => {
     const { html, text } = page('confident');
     expect(text).toContain('Cameras Show 2 express lane cameras, downtown to Northgate');
-    expect(html).toContain('<details>');
+    expect(html).toContain('<details id="cameras">');
     expect(html).not.toContain('images.wsdot.wa.gov');
   });
 

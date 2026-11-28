@@ -12,14 +12,14 @@ Live at [andrewmacheret.com/projects/i5](https://andrewmacheret.com/projects/i5/
 
 It's the web version of [i5-macos-menubar](https://github.com/andrewmacheret/i5-macos-menubar) and [i5-android](https://github.com/andrewmacheret/i5-android). The schedule comes from [i5-server-lambdas](https://github.com/andrewmacheret/i5-server-lambdas), which reads WSDOT's page and highway alerts with two AI models and works out the timeline. This page only draws it.
 
-![The page showing the lanes northbound, closing early at 9 PM, with timelines for today and tomorrow](public/screenshot.png)
+![The page showing the lanes northbound until 11 PM, a notice that they're reduced to two lanes tonight, and timelines for today and tomorrow](public/screenshot.png)
 
 ## Features
 
 The page has the same sections as the Mac popover and the Android app screen:
 
 - **Status:** green **N** for northbound, blue **S** for southbound, red **✕** for closed, and what happens next, like "Closes at 9:00 PM · 5h 24m". An amber dot on the icon means the lanes switch within 15 minutes.
-- **Can't confirm:** an amber **⚠** replaces the direction whenever the status can't be trusted, with each reason and links to live sources. See [When to trust it](#when-to-trust-it).
+- **Can't confirm:** an amber **⚠** replaces the direction whenever the status can't be trusted, with each reason and links to live sources. Its Traffic cameras link opens the Cameras section. See [When to trust it](#when-to-trust-it).
 - **Notices:** closures and other notices in effect now or later today.
 - **Timelines:** colored bars for today and tomorrow, with a marker for now.
 - **Travel times:** downtown Seattle to Everett and back through the express lanes and on the regular lanes, from WSDOT's sensors, with the regular lanes' usual time.
@@ -28,6 +28,8 @@ The page has the same sections as the Mac popover and the Android app screen:
 - **Planned changes:** weekend closures, early closing dates, and holidays in the next two weeks, with how sure the times are and WSDOT's own words.
 - **Regular schedule and sources:** the weekly schedule as WSDOT posts it, and links to every page and alert the data comes from.
 - **Badge for your site:** builds the Markdown or HTML for the badge below.
+
+![Travel times through the express lanes and the regular lanes, and the Cameras section open on the 16 express lane cameras](docs/travel-times-and-cameras.png)
 
 Times are always Seattle time. If your browser uses another time zone, the page says so.
 
@@ -69,14 +71,14 @@ You need Node.js 24 or later.
 | `npm install` | Install the dependencies |
 | `npm test` | Run the page tests |
 | `npm run typecheck` | Check the TypeScript types |
-| `npm run dev` | Run the page on [localhost:5173](http://localhost:5173), using an API on localhost:8787. Start one with `npm run api` in [i5-server-lambdas](https://github.com/andrewmacheret/i5-server-lambdas). |
+| `npm run dev` | Run the page on [localhost:5173](http://localhost:5173), using an API on localhost:8787. Start one with `npm run api` in [i5-server-lambdas](https://github.com/andrewmacheret/i5-server-lambdas). For screenshots, start it with `-- --at 2026-12-01T15:00-08:00` and open the page with the same `?now=`. |
 | `npm run build` | Build the page into `dist/` |
 
 Add `?api=` to the page's address to use another copy of the API, like `?api=https://i5.andrewmacheret.com` to run the local page against the real one.
 
 ## Health check
 
-Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles, the README badge, and the API's own health check, which fails if the 15 minute refresh stopped, can't read WSDOT, or no model could read its latest notice. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles, the README badge, and the API's own health check, which fails if the 15 minute refresh stopped, can't read WSDOT, or no model could read its latest notice. It also loads four express lane camera pictures from WSDOT (half have to load, since single cameras go down now and then), and checks that WSDOT Traffic still posts on Bluesky. WSDOT's map answers every address with its app, even ones that don't exist, so a broken map link can't be told apart from a working one. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 

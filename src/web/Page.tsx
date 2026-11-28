@@ -5,7 +5,7 @@ import { doubtsBetween } from '../core/timeline.ts';
 import { type Snapshot, verb } from '../core/snapshot.ts';
 import { LIVE_MAX_AGE } from '../core/trust.ts';
 import BadgeMaker from './BadgeMaker.tsx';
-import Cameras from './Cameras.tsx';
+import Cameras, { CAMERAS_ID, openCameras } from './Cameras.tsx';
 import { Callout, Card, Dot, Icon, ScheduleRows, SourceLink, StatusIcon, Timeline } from './parts.tsx';
 
 // Everything on the page, drawn from the server's timeline. No data loading here, so tests can
@@ -126,7 +126,13 @@ function StatusCard({ snap, loading }: { snap: Snapshot; loading: boolean }) {
           ))}
           <p className="live-sources">
             <strong>Check a live source before you drive:</strong>{' '}
-            <a href={SOURCES.wsdotTraffic}>WSDOT Traffic on Bluesky</a> · <a href={SOURCES.travelMap}>Traffic cameras</a> ·{' '}
+            <a href={SOURCES.wsdotTraffic}>WSDOT Traffic on Bluesky</a> · {snap.status.cameras?.length ? (
+              <a href={`#${CAMERAS_ID}`} onClick={openCameras}>
+                Traffic cameras
+              </a>
+            ) : (
+              <a href={SOURCES.travelMap}>Traffic cameras</a>
+            )} ·{' '}
             <a href={SOURCES.expressLanes}>WSDOT page</a>
           </p>
         </div>
