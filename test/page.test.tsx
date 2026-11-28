@@ -74,7 +74,7 @@ describe('the page', () => {
     expect(html).toContain('<li>Wed, Dec 2 9:00 PM → Thu, Dec 3 5:00 AM</li>');
     expect(text).toContain("WSDOT's words");
     expect(text).toContain("WSDOT's alert");
-    expect(html).toContain('https://wsdot.com/travel/real-time/map/?alertId=727762');
+    expect(html).toContain('https://wsdot.com/travel/real-time/map/?featureid=727762&amp;featuretype=alert');
     expect(text).toContain('Notices read by gemini-4-hydrogen and gpt-oss-120b.');
     expect(text).toContain("WSDOT's sensors at 3:00 PM: 18 min northbound through the express lanes.");
     expect(html).toContain('aria-label="Today: Southbound 5 AM to 11 AM, Northbound 11:15 AM to 11 PM"');
