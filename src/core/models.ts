@@ -149,6 +149,6 @@ export interface ServerStatus {
 export const SOURCES = {
   expressLanes: 'https://wsdot.wa.gov/travel/roads-bridges/express-lanes',
   alerts: 'https://wsdot.com/travel/real-time/alerts',
-  travelMap: 'https://wsdot.com/travel/real-time/map/',
+  travelMap: 'https://wsdot.com/Travel/Real-time/Map/',
   wsdotTrafficX: 'https://x.com/wsdot_traffic',
 };

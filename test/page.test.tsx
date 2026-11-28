@@ -74,7 +74,7 @@ describe('the page', () => {
     expect(html).toContain('<li>Wed, Dec 2 9:00 PM → Thu, Dec 3 5:00 AM</li>');
     expect(text).toContain("WSDOT's words");
     expect(text).toContain("WSDOT's alert");
-    expect(html).toContain('https://wsdot.com/travel/real-time/map/?featureid=727762&amp;featuretype=alert');
+    expect(html).toContain('https://wsdot.com/Travel/Real-time/Map/?featureid=727762&amp;featuretype=alert');
     expect(text).toContain('Notices read by gemini-4-hydrogen and gpt-oss-120b.');
     expect(text).toContain("WSDOT's sensors at 3:00 PM: 18 min northbound through the express lanes.");
     expect(html).toContain('aria-label="Today: Southbound 5 AM to 11 AM, Northbound 11:15 AM to 11 PM"');
@@ -123,6 +123,20 @@ describe('the page', () => {
     expect(text).toContain('Northbound around the clock for Revive I-5 Now until 12:00 AM Fri, Jan 1. It could last longer.');
     expect(text).toContain('Ninth Avenue on-ramp closed Now until 12:00 AM Tue, Sep 8.');
     expect(text).toContain('No changes coming up.');
+  });
+
+  it('lists up to 20 times per notice and folds the rest behind …', () => {
+    const f = fixture('confident');
+    const p = f.status.published!;
+    const n = p.notices.find((x) => x.title === 'Closing early at 9 p.m.')!;
+    const spans = Array.from({ length: 25 }, (_, i) => ({ start: f.at + (i + 1) * 86_400_000, end: f.at + (i + 1) * 86_400_000 + 3_600_000 }));
+    const status = { ...f.status, published: { ...p, notices: [{ ...n, spans }] } };
+    const { html } = render(status, f.at);
+    const shown = html.slice(0, html.indexOf('class="more-times"'));
+    const folded = html.slice(html.indexOf('class="more-times"'));
+    expect(shown.match(/<li>[^<]+→/g)).toHaveLength(20);
+    expect(folded).toContain('aria-label="Show 5 more times">…</summary>');
+    expect(folded.slice(0, folded.indexOf('</details>')).match(/<li>/g)).toHaveLength(5);
   });
 
   it('says it is loading before the first answer', () => {

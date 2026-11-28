@@ -407,6 +407,20 @@ h3 {
   white-space: pre-line;
 }
 
+.planned-item .more-times summary {
+  margin-top: 0;
+  padding-left: 1.2rem;
+  list-style: none;
+}
+
+.planned-item .more-times summary::-webkit-details-marker {
+  display: none;
+}
+
+.planned-item .more-times[open] summary {
+  display: none;
+}
+
 .planned-item details summary {
   margin-top: 0.2rem;
   color: var(--muted);

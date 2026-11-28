@@ -10,10 +10,10 @@ import { Callout, Card, Dot, Icon, ScheduleRows, SourceLink, StatusIcon, Timelin
 // render it with any status.
 
 const DAY = 24 * 60 * 60_000;
-/** How far ahead "Planned changes" looks */
+/** "Planned changes" lists notices with a time starting within this many days */
 const PLANNED_DAYS = 14;
-/** Times listed per notice before "and N more" */
-const MAX_TIMES = 6;
+/** Times listed per notice before the rest fold behind "…" */
+const MAX_TIMES = 20;
 
 export interface PageProps {
   snap: Snapshot;
@@ -256,9 +256,9 @@ function Planned({ snap }: { snap: Snapshot }) {
   const items = p.notices
     .map((n) => ({
       n,
-      spans: n.spans.filter((s) => (s.start === null || s.start < until) && (s.end === null || s.end > snap.now)),
+      spans: n.spans.filter((s) => s.end === null || s.end > snap.now),
     }))
-    .filter((x) => x.spans.length > 0);
+    .filter((x) => x.spans.some((s) => s.start === null || s.start < until));
   const holidays = p.doubts.filter((d) => d.source === 'holiday' && d.end > snap.now && d.start < until);
   if (!items.length && !holidays.length) return null;
   return (
@@ -272,8 +272,17 @@ function Planned({ snap }: { snap: Snapshot }) {
               {spans.slice(0, MAX_TIMES).map((s, i) => (
                 <li key={i}>{spanText(s)}</li>
               ))}
-              {spans.length > MAX_TIMES && <li>and {spans.length - MAX_TIMES} more</li>}
             </ul>
+            {spans.length > MAX_TIMES && (
+              <details className="more-times">
+                <summary aria-label={`Show ${spans.length - MAX_TIMES} more times`}>…</summary>
+                <ul className="times">
+                  {spans.slice(MAX_TIMES).map((s, i) => (
+                    <li key={i}>{spanText(s)}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
             {note && <p className="warn-text">{note}</p>}
             <details>
               <summary>{n.source === 'alert' ? "WSDOT's alert" : "WSDOT's words"}</summary>

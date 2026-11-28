@@ -1353,7 +1353,7 @@
     {
      "title": "Reduced to two lanes at night",
      "detail": "Between Monday, Nov. 30, and Thursday, Dec. 3, the I-5 express lanes will be reduced to two lanes across the Ship Canal Bridge beginning at 7 p.m. each night for drainage improvements.\nThe express lanes will reopen southbound at their regularly scheduled time of 5 a.m. each morning.",
-     "link": "https://wsdot.com/travel/real-time/map/?featureid=727762&featuretype=alert",
+     "link": "https://wsdot.com/Travel/Real-time/Map/?featureid=727762&featuretype=alert",
      "kind": "other",
      "spans": [
       {
@@ -1380,7 +1380,7 @@
     {
      "title": "Closing early at 9 p.m.",
      "detail": "The express lanes will close at 9 p.m., two hours earlier than normal, on Monday, Nov. 30, and Wednesday, Dec. 2.",
-     "link": "https://wsdot.com/travel/real-time/map/?featureid=727762&featuretype=alert",
+     "link": "https://wsdot.com/Travel/Real-time/Map/?featureid=727762&featuretype=alert",
      "kind": "closed",
      "spans": [
       {
@@ -1418,7 +1418,7 @@
       "gpt-oss-120b"
      ],
      "status": "answered",
-     "link": "https://wsdot.com/travel/real-time/map/?featureid=727762&featuretype=alert"
+     "link": "https://wsdot.com/Travel/Real-time/Map/?featureid=727762&featuretype=alert"
     }
    ]
   },
