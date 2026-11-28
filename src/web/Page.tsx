@@ -124,7 +124,7 @@ function StatusCard({ snap, loading }: { snap: Snapshot; loading: boolean }) {
           ))}
           <p className="live-sources">
             <strong>Check a live source before you drive:</strong> <a href={SOURCES.travelMap}>Traffic cameras</a> ·{' '}
-            <a href={SOURCES.wsdotTrafficX}>@wsdot_traffic</a> · <a href={SOURCES.expressLanes}>WSDOT page</a>
+            <a href={SOURCES.wsdotTraffic}>WSDOT Traffic</a> · <a href={SOURCES.expressLanes}>WSDOT page</a>
           </p>
         </div>
       )}
@@ -389,7 +389,7 @@ function Sources({ snap }: { snap: Snapshot }) {
           <SourceLink key={a.hash} title="WSDOT highway alert" subtitle="About the express lanes" href={a.link!} />
         ))}
         <SourceLink title="WSDOT real-time travel map" subtitle="Live traffic, alerts and cameras" href={SOURCES.travelMap} />
-        <SourceLink title="@wsdot_traffic" subtitle="Unplanned closures get posted here first" href={SOURCES.wsdotTrafficX} />
+        <SourceLink title="WSDOT Traffic on Bluesky" subtitle="Unplanned closures get posted here first" href={SOURCES.wsdotTraffic} />
       </ul>
       <p className="hint">
         WSDOT doesn't publish a live feed for the express lanes. The server reads WSDOT's page and highway alerts every

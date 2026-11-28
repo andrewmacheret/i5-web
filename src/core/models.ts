@@ -164,5 +164,6 @@ export const SOURCES = {
   /** The travel map on the express lanes, with cameras, traffic and alerts on */
   travelMap:
     'https://wsdot.com/Travel/Real-time/Map/?layers=traffic-flow%2Calert%2Ccamera&base=wsdot&extent=-122.40%2C47.595%2C-122.25%2C47.715&fromLink=true',
-  wsdotTrafficX: 'https://x.com/wsdot_traffic',
+  /** WSDOT Traffic on Bluesky, for King and Snohomish counties. Readable without signing in, unlike X. */
+  wsdotTraffic: 'https://bsky.app/profile/traffic.wsdot.wa.gov',
 };

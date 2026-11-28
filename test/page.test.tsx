@@ -96,11 +96,12 @@ describe('the page', () => {
   });
 
   it("can't confirm the day after Thanksgiving, with no holiday notice", () => {
-    const { text } = page('holiday');
+    const { text, html } = page('holiday');
+    expect(html).toContain('href="https://bsky.app/profile/traffic.wsdot.wa.gov"');
     expect(text).toContain("Can't confirm");
     expect(text).toContain("Expected northbound, but don't rely on it");
     expect(text).toContain('No word yet on Thanksgiving');
-    expect(text).toContain('Check a live source before you drive');
+    expect(text).toContain('Check a live source before you drive: Traffic cameras · WSDOT Traffic · WSDOT page');
   });
 
   it('says it is checking while the models read a new page', () => {
